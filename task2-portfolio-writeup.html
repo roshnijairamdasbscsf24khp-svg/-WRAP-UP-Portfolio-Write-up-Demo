@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio Write-Up — Web Dev Internship</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0b0f1c;--surface:#111827;--card:#1a2236;--border:rgba(255,255,255,.08);
+  --accent:#6366f1;--accent2:#a78bfa;--green:#10b981;--yellow:#f59e0b;
+  --text:#f0f6ff;--muted:#6b7280;--radius:14px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;padding:40px 20px 80px;line-height:1.7;}
+.wrap{max-width:860px;margin:0 auto;}
+
+/* HEADER */
+.doc-header{text-align:center;padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:48px;}
+.doc-tag{display:inline-block;padding:5px 14px;border:1px solid var(--accent2);color:var(--accent2);border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.1em;margin-bottom:16px;}
+.doc-header h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+.doc-header h1 span{color:var(--accent2);}
+.doc-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:20px;}
+.meta-item{font-size:.8rem;color:var(--muted);}
+.meta-item strong{color:var(--text);}
+
+/* SECTIONS */
+.section{margin-bottom:48px;}
+.section-num{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+.section h2{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:20px;letter-spacing:-.01em;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.section p{color:#a0aec0;font-size:.95rem;line-height:1.8;margin-bottom:14px;}
+.section p:last-child{margin-bottom:0;}
+
+/* WEEK CARDS */
+.week-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;}
+.week-label{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.week-badge{background:rgba(99,102,241,.2);color:var(--accent2);border-radius:8px;padding:4px 12px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+.week-card h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px;}
+.project-list{display:flex;flex-direction:column;gap:8px;}
+.proj-item{display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:#a0aec0;}
+.proj-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;flex-shrink:0;margin-top:7px;}
+
+/* STACK GRID */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+.stack-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;}
+.stack-icon{font-size:1.4rem;}
+.stack-name{font-size:.82rem;font-weight:600;}
+
+/* CHALLENGES */
+.challenge-card{background:var(--card);border-left:3px solid var(--accent2);border-radius:0 12px 12px 0;padding:18px 20px;margin-bottom:14px;}
+.challenge-card .ch-q{font-size:.875rem;font-weight:700;margin-bottom:6px;color:var(--text);}
+.challenge-card .ch-a{font-size:.85rem;color:#a0aec0;line-height:1.7;}
+
+/* REFLECTION */
+.reflection-box{background:linear-gradient(135deg,rgba(99,102,241,.1) 0%,rgba(167,139,250,.05) 100%);border:1px solid rgba(167,139,250,.2);border-radius:var(--radius);padding:28px;}
+.reflection-box p{color:#b0b8d0;}
+
+/* LEARN NEXT */
+.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.learn-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.learn-card .l-icon{font-size:1.8rem;margin-bottom:10px;}
+.learn-card h4{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:6px;}
+.learn-card p{font-size:.82rem;color:var(--muted);line-height:1.6;}
+
+/* PORTFOLIO TABLE */
+.portfolio-table{width:100%;border-collapse:collapse;font-size:.875rem;}
+.portfolio-table th{text-align:left;padding:10px 14px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);}
+.portfolio-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);color:#a0aec0;vertical-align:middle;}
+.portfolio-table tr:hover td{background:rgba(255,255,255,.02);}
+.wk-badge{display:inline-block;padding:2px 10px;border-radius:100px;font-size:.7rem;font-weight:700;}
+.wk1{background:rgba(99,102,241,.15);color:#818cf8;}
+.wk2{background:rgba(167,139,250,.15);color:#c084fc;}
+.wk3{background:rgba(16,185,129,.15);color:#34d399;}
+.wk4{background:rgba(245,158,11,.15);color:#fbbf24;}
+
+@media(max-width:560px){
+  .learn-grid{grid-template-columns:1fr;}
+  .doc-meta{flex-direction:column;align-items:center;gap:8px;}
+  .stack-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="doc-tag">✦ INTERNSHIP PORTFOLIO</div>
+    <h1>4 Weeks of <span>Web Development</span></h1>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:10px;">A complete write-up of projects, challenges, and growth during the internship at QWETRUM TECHNOLOGIES</p>
+    <div class="doc-meta">
+      <div class="meta-item"><strong>Company:</strong> QWETRUM TECHNOLOGIES</div>
+      <div class="meta-item"><strong>Duration:</strong> 4 Weeks</div>
+      <div class="meta-item"><strong>Projects:</strong> 8 Total</div>
+      <div class="meta-item"><strong>Role:</strong> Frontend Web Developer Intern</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS BY WEEK -->
+  <div class="section">
+    <div class="section-num">01</div>
+    <h2>Projects Built — Week by Week</h2>
+
+    <div class="week-card">
+      <div class="week-label"><span class="week-badge">Week 1</span></div>
+      <h3>Foundation — HTML, CSS & Vanilla JavaScript</h3>
+      <div class="project-list">
+        <div class="proj-item"><div class="proj-dot"></div><div><strong>Responsive Landing Page</strong> — Built a multi-section landing page from scratch with sticky navigation, smooth-scroll CTA, 3 feature cards, and a responsive mobile layout. No frameworks — pure HTML, CSS and JS.</div></div>
+        <div class="proj-item"><div class="proj-dot"></div><div><strong>Dynamic Countries App</strong> — A web app that fetches live data from the REST Countries API, displays 10 countries with flags and population, and lets users filter results in real-time via a search bar. Includes a loading spinner and friendly error handling.</div></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-label"><span class="week-badge">Week 2</span></div>
+      <h3>JavaScript Deep Dive — Interactivity & Forms</h3>
+      <div class="project-list">
+        <div class="proj-item"><div class="proj-dot"></div><div><strong>BrainBurst Quiz App</strong> — An interactive quiz with 10 shuffled questions, a 30-second countdown timer per question, correct/wrong highlighting, a live progress bar, and a results screen with score ring animation.</div></div>
+        <div class="proj-item"><div class="proj-dot"></div><div><strong>Multi-Step Registration Form</strong> — A 3-step form covering Personal Info, Account Details, and Confirmation, with live field validation, password strength indicator, confirm-match detection, and saved entries displayed in a deletable table.</div></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-label"><span class="week-badge">Week 3</span></div>
+      <h3>E-Commerce & CSS Frameworks</h3>
+      <div class="project-list">
+        <div class="proj-item"><div class="proj-dot"></div><div><strong>Mini E-Commerce Page</strong> — A product listing page with 16 items, category filtering, price/rating sorting, a product detail modal with quantity selector, and a fully working shopping cart using localStorage.</div></div>
+        <div class="proj-item"><div class="proj-dot"></div><div><strong>Bootstrap Landing Page Rebuild</strong> — Rebuilt the Week 1 landing page using Bootstrap 5, using 5+ components including Navbar, Cards, Modal, Grid, and Forms. Included a 100-word reflection comparing Bootstrap to plain CSS.</div></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-label"><span class="week-badge">Week 4</span></div>
+      <h3>Capstone — Complete E-Commerce Website</h3>
+      <div class="project-list">
+        <div class="proj-item"><div class="proj-dot"></div><div><strong>NexShop Capstone</strong> — A full multi-page e-commerce website with Home, Shop, Product Detail, Cart, Checkout, and Order Success pages. Features include global search, category filters, sorting, localStorage cart persistence, full checkout form validation, and a clean responsive UI built with Bootstrap + custom CSS.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH STACK -->
+  <div class="section">
+    <div class="section-num">02</div>
+    <h2>Tech Stack Used</h2>
+    <div class="stack-grid">
+      <div class="stack-item"><div class="stack-icon">🌐</div><div class="stack-name">HTML5</div></div>
+      <div class="stack-item"><div class="stack-icon">🎨</div><div class="stack-name">CSS3</div></div>
+      <div class="stack-item"><div class="stack-icon">⚡</div><div class="stack-name">JavaScript</div></div>
+      <div class="stack-item"><div class="stack-icon">🅱️</div><div class="stack-name">Bootstrap 5</div></div>
+      <div class="stack-item"><div class="stack-icon">💾</div><div class="stack-name">localStorage</div></div>
+      <div class="stack-item"><div class="stack-icon">🔗</div><div class="stack-name">REST APIs</div></div>
+      <div class="stack-item"><div class="stack-icon">📐</div><div class="stack-name">CSS Flexbox</div></div>
+      <div class="stack-item"><div class="stack-icon">📏</div><div class="stack-name">CSS Grid</div></div>
+    </div>
+  </div>
+
+  <!-- CHALLENGES -->
+  <div class="section">
+    <div class="section-num">03</div>
+    <h2>Challenges Faced & How I Solved Them</h2>
+
+    <div class="challenge-card">
+      <div class="ch-q">🐛 Quiz App — Inline onclick handlers causing classList errors on null elements</div>
+      <div class="ch-a">When the quiz card's innerHTML was replaced for the next question, inline onclick handlers were firing against stale DOM references, causing "Cannot read properties of null (reading 'classList')". Solved by replacing all inline onclick attributes with addEventListener calls attached after each innerHTML update — ensuring the DOM elements always exist before any event listener touches them.</div>
+    </div>
+
+    <div class="challenge-card">
+      <div class="ch-q">🐛 Quiz options showing blank text for HTML tag answers</div>
+      <div class="ch-a">Options like &lt;style&gt;, &lt;link&gt;, and &lt;h1&gt; were injected raw into innerHTML, so the browser interpreted them as actual HTML tags and rendered them invisibly. Fixed by escaping angle brackets as &amp;lt; and &amp;gt; so they display as text rather than being parsed as markup.</div>
+    </div>
+
+    <div class="challenge-card">
+      <div class="ch-q">📱 Getting HTML files to open correctly on mobile</div>
+      <div class="ch-a">Files referencing separate CSS and JS files failed on mobile because relative paths don't resolve correctly when opening local files. Solved by consolidating every project into a single self-contained .html file with all CSS in a &lt;style&gt; block and all JavaScript in a &lt;script&gt; block — eliminating all external dependencies.</div>
+    </div>
+
+    <div class="challenge-card">
+      <div class="ch-q">🛒 Cart state resetting on page navigation in the capstone</div>
+      <div class="ch-a">Since the capstone uses a single-page architecture with JavaScript-controlled page switching, cart state was lost between renders. Solved by syncing the cart array to localStorage on every update and reading from it on load — giving the cart persistence across sessions and page changes.</div>
+    </div>
+  </div>
+
+  <!-- 200-WORD REFLECTION -->
+  <div class="section">
+    <div class="section-num">04</div>
+    <h2>200-Word Reflection</h2>
+    <div class="reflection-box">
+      <p>Starting this internship, I could write basic HTML and style pages with CSS. Four weeks later, I have built eight complete projects — from a simple landing page to a fully functional multi-page e-commerce website with a working cart, checkout validation, and real-time search.</p>
+      <p>The most valuable lesson was learning to debug. Every project broke in a new way. The quiz app had DOM timing bugs. The countries app had CORS and API error cases to handle. The capstone required thinking about state management, localStorage, and how a single JavaScript file can power an entire website without any backend. Each problem forced me to understand the code more deeply rather than just copying and pasting.</p>
+      <p>Working at QWETRUM TECHNOLOGIES gave me real deadlines and real expectations. There was no hand-holding — I had to research, break things, fix them, and deliver. That pressure made me grow faster than any tutorial could.</p>
+      <p>Looking back at Week 1 versus Week 4, the difference is not just in the code — it's in the confidence to open a blank file and know I can build something worth showing. That is the real result of this internship.</p>
+    </div>
+  </div>
+
+  <!-- LEARN NEXT -->
+  <div class="section">
+    <div class="section-num">05</div>
+    <h2>2 Technologies I Want to Learn Next</h2>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <div class="l-icon">⚛️</div>
+        <h4>React.js</h4>
+        <p>After building everything in vanilla JavaScript, I can see exactly why a component-based framework like React exists. Managing state, re-rendering only what changes, and building reusable UI components would have made the capstone's page-switching architecture far cleaner and more scalable. React is the natural next step.</p>
+      </div>
+      <div class="learn-card">
+        <div class="l-icon">🟢</div>
+        <h4>Node.js & Express</h4>
+        <p>Every project I built was frontend-only. I used localStorage as a substitute for a real database, and hardcoded dummy product data in JavaScript arrays. Learning Node.js would let me build actual APIs, connect a real database, handle user authentication, and turn these static sites into full-stack applications.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO TABLE -->
+  <div class="section">
+    <div class="section-num">06</div>
+    <h2>All 4 Weeks — Project Portfolio</h2>
+    <table class="portfolio-table">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Project</th>
+          <th>Key Skills</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="wk-badge wk1">Week 1</span></td><td>Responsive Landing Page</td><td>HTML, CSS, Flexbox, Media Queries, Smooth Scroll</td><td>✅ Complete</td></tr>
+        <tr><td><span class="wk-badge wk1">Week 1</span></td><td>Dynamic Countries App</td><td>Fetch API, DOM Manipulation, Search Filter, Error Handling</td><td>✅ Complete</td></tr>
+        <tr><td><span class="wk-badge wk2">Week 2</span></td><td>BrainBurst Quiz App</td><td>Timers, Arrays, DOM Updates, Animation, State</td><td>✅ Complete</td></tr>
+        <tr><td><span class="wk-badge wk2">Week 2</span></td><td>Multi-Step Form</td><td>Validation, Password Strength, Multi-step UX</td><td>✅ Complete</td></tr>
+        <tr><td><span class="wk-badge wk3">Week 3</span></td><td>Mini E-Commerce Page</td><td>localStorage, Cart Logic, Modals, Filtering</td><td>✅ Complete</td></tr>
+        <tr><td><span class="wk-badge wk3">Week 3</span></td><td>Bootstrap Landing Page</td><td>Bootstrap 5, Grid, Modal, Responsive Utilities</td><td>✅ Complete</td></tr>
+        <tr><td><span class="wk-badge wk4">Week 4</span></td><td>NexShop Capstone</td><td>SPA Architecture, Full Cart, Checkout, Validation, localStorage</td><td>✅ Complete</td></tr>
+        <tr><td><span class="wk-badge wk4">Week 4</span></td><td>Portfolio Write-Up</td><td>Documentation, Reflection, Professional Writing</td><td>✅ Complete</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center;padding:32px 0;border-top:1px solid var(--border);color:var(--muted);font-size:.8rem;">
+    QWETRUM TECHNOLOGIES · Web Development Internship · 2025 · All projects built from scratch
+  </div>
+
+</div>
+</body>
+</html>
